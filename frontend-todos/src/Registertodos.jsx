@@ -16,7 +16,7 @@ export default function Registertodos() {
         if(password !== confirmPassword){
             return toast.error('password must match with confirmpassword')
         }else{
-            const login =await axios.post('http://localhost:3000/Register',{password,email})
+            const login =await axios.post('https://todos-back-prt.onrender.com/Register',{password,email})
             toast.success(login.data)
             nav('/')
         }
@@ -25,7 +25,8 @@ export default function Registertodos() {
         nav('/')
     }
   return (
-    <div className='main-container'>
+    <div className='main-container' style={{marginTop:'50px'}}>
+        <h1 style={{textAlign:'center'}}>Register!!!!!!</h1>
         <div>
             <h1>Email :</h1>
             <input type="email" onChange={(e)=>setState({...state,email:e.target.value})}/>
@@ -42,7 +43,7 @@ export default function Registertodos() {
             <button onClick={handler}>Register</button>
         </div>
         <div>
-            <h4><span className='btn-reLg' style={{color:'blue'}} onClick={login}>Login Page</span></h4>
+            <h4 style={{textAlign:'center'}}><span className='btn-reLg' style={{color:'blue'}} onClick={login}>Login Page!!!</span></h4>
         </div>
     </div>
   )

@@ -11,7 +11,7 @@ export default function TodosPost() {
     const addAc =async()=>{
         // console.log(activity)
         const headers={'authorization':localStorage.getItem('token')}
-        const addAct =await axios.post('http://localhost:3000/uploading/posting',state,{headers})
+        const addAct =await axios.post('https://todos-back-prt.onrender.com/uploading/posting',state,{headers})
         console.log(addAct.data)
         toast.success('activity has been posted')
         nav('/view',{replace:true})

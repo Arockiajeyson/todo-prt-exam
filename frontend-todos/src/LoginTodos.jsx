@@ -15,7 +15,7 @@ export default function LoginTodos() {
     })
     const handler =async()=>{
         const {email,password} =state
-        const checkingDb =await axios.post('http://localhost:3000/login',{email,password})
+        const checkingDb =await axios.post('https://todos-back-prt.onrender.com/login',{email,password})
         if(checkingDb.data =='password Worng'){
             return toast.error(checkingDb.data)
         }else if(checkingDb.data =='Register first'){
@@ -33,6 +33,7 @@ export default function LoginTodos() {
     return (
         <div className='main-container'>
             <div>
+                <h1 style={{textAlign:'center'}}>Login!!!!</h1>
                 <div>
                     <h1>Email :</h1>
                     <input type="email" onChange={(e) => setState({ ...state, email: e.target.value })} />

@@ -21,16 +21,16 @@ export default function TodosView() {
     useEffect(() => {
         const da = async () => {
             const headers = { 'authorization': localStorage.getItem('token') }
-            const geting = await axios.post('http://localhost:3000/uploading/getingTodos', null, { headers })
+            const geting = await axios.post('https://todos-back-prt.onrender.com/uploading/getingTodos', null, { headers })
             setState(geting.data)
-            const geting2 = await axios.post('http://localhost:3000/uploading/time', null, { headers })
+            const geting2 = await axios.post('https://todos-back-prt.onrender.com/uploading/time', null, { headers })
             setHistory(geting2.data)
         }
         da()
     }, [state])
     const actions =async(idx,action)=>{
         const headers = { 'authorization': localStorage.getItem('token') }
-        const changeAction =await axios.post('http://localhost:3000/uploading/updatingAc',{idx,action},{headers})
+        const changeAction =await axios.post('https://todos-back-prt.onrender.com/uploading/updatingAc',{idx,action},{headers})
     }
     const pushing =(e,time)=>{
         setHistory([{...history,pro:e,time:time}])
