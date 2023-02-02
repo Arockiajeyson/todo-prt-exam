@@ -6,9 +6,11 @@ import { useState } from 'react'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Auth from './Authoto'
+import { toast } from 'react-hot-toast'
 export default function TodosView() {
     const {state1} =useContext(Auth)
     const [state, setState] = useState([])
+    const [start,setStart] =useState(0)
     const [history,setHistory] =useState([{pro:'',time:''}])
     const nav = useNavigate()
     const logout = () => {
@@ -16,7 +18,7 @@ export default function TodosView() {
         nav('/', { replace: true })
     }
     const newAdd = () => {
-        nav('/add')
+        nav('/add',{replace:true})
     }
     useEffect(() => {
         const da = async () => {
@@ -29,6 +31,20 @@ export default function TodosView() {
         da()
     }, [state])
     const actions =async(idx,action)=>{
+        if(action =='start'){
+            setStart(start+1)
+            localStorage.setItem('states',start )
+        }else if(action =='Pause'){
+            setStart(0)
+            localStorage.setItem('states',0 )
+        }else if(action =='End'){
+            setStart(0)
+            localStorage.setItem('states',0 )
+        }
+        console.log('goo')
+        if(localStorage.getItem('states') >=1){
+            return toast.error('You can do only one work at a time')
+        }
         const headers = { 'authorization': localStorage.getItem('token') }
         const changeAction =await axios.post('https://todos-back-prt.onrender.com/uploading/updatingAc',{idx,action},{headers})
     }
@@ -76,7 +92,7 @@ export default function TodosView() {
                                         <td>{e.status}</td>
                                         <td>{ e.status =='Completed' ?e.time:''}</td>
                                         <td  style={{cursor:'pointer'}}>{e.status =="Ongoing"?<div>
-                                            <span onClick={()=>{actions(e._id,e.time)}} style={{color:'red'}}>End</span> <span style={{color:'yellow'}} onClick={()=>actions(e._id,'Pause')}>Pause</span>
+                                            <span onClick={()=>{actions(e._id,'End')}} style={{color:'red'}}>End</span> <span style={{color:'yellow'}} onClick={()=>actions(e._id,'Pause')}>Pause</span>
                                         </div>:<span onClick={()=>actions(e._id,'start')}>{e.action}</span>}</td>
                                     </tr>
                                 )

@@ -23,12 +23,12 @@ export default function LoginTodos() {
         }else{
             localStorage.setItem('token',checkingDb.data[1])
             toast.success(checkingDb.data[0])
-            navi('/view',{replace:false})
+            navi('/view',{replace:true})
             name(email.split('@')[0])
         }
     }
     const regi =()=>{
-        navi('/Register')
+        navi('/Register',{replace:true})
     }
     return (
         <div className='main-container'>

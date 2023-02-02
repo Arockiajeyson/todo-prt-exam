@@ -13,16 +13,19 @@ export default function Registertodos() {
     })
     const handler =async()=>{
         const {email,password,confirmPassword} =state
+        if(password =='' || confirmPassword ==''){
+            return toast.error('Enter password')
+        }
         if(password !== confirmPassword){
             return toast.error('password must match with confirmpassword')
         }else{
             const login =await axios.post('https://todos-back-prt.onrender.com/Register',{password,email})
             toast.success(login.data)
-            nav('/')
+            nav('/',{replace:true})
         }
     }
     const login =()=>{
-        nav('/')
+        nav('/',{replace:true})
     }
   return (
     <div className='main-container' style={{marginTop:'50px'}}>
